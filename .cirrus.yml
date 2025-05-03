@@ -1,7 +1,7 @@
 task:
   name: Hello on Windows
   windows_container:
-    image: cirrusci/windowsservercore:latest
+    image: cirrusci/windowsservercore:2019
 
   install_script:
     - echo Hello from Windows!
