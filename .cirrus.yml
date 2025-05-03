@@ -1,27 +1,7 @@
 task:
-  name: Windows 10 RDP via ngrok
+  name: Hello on Windows
   windows_container:
     image: cirrusci/windowsservercore:latest
 
-  env:
-    NGROK_AUTH_TOKEN: ENCRYPTED[7aac4df803a3d3d1391e4845ad8abca04d946efa036b118c90600d9901bb82f21aa3f52751cc7fe8de4852c6bbc3d80d]
-
   install_script:
-    - powershell -Command "Invoke-WebRequest https://github.com/dopaemon/Storage/releases/download/s/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip"
-    - powershell -Command "Expand-Archive ngrok.zip"
-    - powershell -Command ".\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN"
-
-  setup_script:
-    - powershell -Command "Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 0"
-    - powershell -Command "Enable-NetFirewallRule -DisplayGroup 'Remote Desktop'"
-    - powershell -Command "Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name 'UserAuthentication' -Value 1"
-    - powershell -Command "Set-LocalUser -Name 'runneradmin' -Password (ConvertTo-SecureString -AsPlainText '@cyb3rking' -Force)"
-
-  rdp_tunnel_script:
-    - powershell -Command "Start-Process -NoNewWindow -FilePath '.\ngrok\ngrok.exe' -ArgumentList 'tcp 3389'"
-    - powershell -Command "Start-Sleep -Seconds 5"
-    - powershell -Command "Write-Host 'Ngrok tunnel should be active. Connect using address from ngrok dashboard.'"
-
-  # Optional: keep the job alive
-  keep_alive_script:
-    - powershell -Command "while ($true) { Start-Sleep -Seconds 3600 }"
+    - echo Hello from Windows!
