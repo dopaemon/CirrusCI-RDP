@@ -7,7 +7,7 @@ task:
     NGROK_AUTH_TOKEN: ENCRYPTED[7aac4df803a3d3d1391e4845ad8abca04d946efa036b118c90600d9901bb82f21aa3f52751cc7fe8de4852c6bbc3d80d]
 
   install_script:
-    - powershell -Command "Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip"
+    - powershell -Command "Invoke-WebRequest https://github.com/dopaemon/Storage/releases/download/s/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip"
     - powershell -Command "Expand-Archive ngrok.zip"
     - powershell -Command ".\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN"
 
